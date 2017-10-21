@@ -1,0 +1,6 @@
+/* Social share */
+.entry-share .theme-heading { float: right; }
+.entry-share ul { float: left; }
+.entry-share ul li { float: right; }
+.entry-share ul li a { margin-left: 12px; margin-right: 0; }
+.entry-share ul li:last-child a { margin-left: 0; }
