@@ -7,7 +7,7 @@
  * Author:				OceanWP
  * Author URI:			https://oceanwp.org/
  * Requires at least:	4.5.0
- * Tested up to:		4.8
+ * Tested up to:		4.8.2
  *
  * Text Domain: ocean-social-sharing
  * Domain Path: /languages/
@@ -224,7 +224,13 @@ final class Ocean_Social_Sharing {
 	     * Sharing sites
 	     */
         $wp_customize->add_setting( 'oss_social_share_sites', array(
-			'default'           	=> array( 'twitter', 'facebook', 'google_plus', 'pinterest', 'linkedin' ),
+			'default'           	=> array(
+				'twitter',
+				'facebook',
+				'google_plus',
+				'pinterest',
+				'linkedin',
+			),
 			'sanitize_callback' 	=> 'oceanwp_sanitize_multi_choices',
 		) );
 
@@ -239,11 +245,33 @@ final class Ocean_Social_Sharing {
 				'google_plus' 	=> 'Google Plus',
 				'pinterest' 	=> 'Pinterest',
 				'linkedin' 		=> 'LinkedIn',
+				'viber' 		=> 'Viber',
+				'vk' 			=> 'VK',
+				'reddit' 		=> 'Reddit',
+				'tumblr' 		=> 'Tumblr',
+				'viadeo' 		=> 'Viadeo',
 			),
 		) ) );
 
 		/**
-	     * Sharing title
+		 * Social Name
+		 */
+		$wp_customize->add_setting( 'oss_social_share_name', array(
+			'transport' 			=> 'postMessage',
+			'default'           	=> false,
+			'sanitize_callback' 	=> 'oceanwp_sanitize_checkbox',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_name', array(
+			'label'	   				=> esc_html__( 'Add Social Name', 'ocean-social-sharing' ),
+			'type' 					=> 'checkbox',
+			'section'  				=> 'oss_sharing_section',
+			'settings' 				=> 'oss_social_share_name',
+			'priority' 				=> 10,
+		) ) );
+
+		/**
+	     * Heading
 	     */
         $wp_customize->add_setting( 'oss_social_share_heading', array(
 			'default'			=> esc_html__( 'Please Share This', 'ocean-social-sharing' ),
@@ -252,11 +280,32 @@ final class Ocean_Social_Sharing {
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_heading', array(
-			'label'			=> esc_html__( 'Heading on Posts', 'ocean-social-sharing' ),
+			'label'			=> esc_html__( 'Sharing Heading', 'ocean-social-sharing' ),
 			'section'		=> 'oss_sharing_section',
 			'settings'		=> 'oss_social_share_heading',
 			'type'			=> 'text',
 			'priority'		=> 10,
+		) ) );
+
+		/**
+		 * Heading Position
+		 */
+		$wp_customize->add_setting( 'oss_social_share_heading_position', array(
+			'transport'				=> 'postMessage',
+			'default'           	=> 'side',
+			'sanitize_callback' 	=> 'oceanwp_sanitize_select',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_heading_position', array(
+			'label'	   				=> esc_html__( 'Heading Position', 'ocean-social-sharing' ),
+			'type' 					=> 'select',
+			'section'  				=> 'oss_sharing_section',
+			'settings' 				=> 'oss_social_share_heading_position',
+			'priority' 				=> 10,
+			'choices' 				=> array(
+				'side' 	=> esc_html__( 'Side', 'ocean-social-sharing' ),
+				'top' 	=> esc_html__( 'Top', 'ocean-social-sharing' ),
+			),
 		) ) );
 
 		/**
@@ -276,16 +325,54 @@ final class Ocean_Social_Sharing {
 		) ) );
 
 		/**
+		 * Style
+		 */
+		$wp_customize->add_setting( 'oss_social_share_style', array(
+			'transport'				=> 'postMessage',
+			'default'           	=> 'minimal',
+			'sanitize_callback' 	=> 'oceanwp_sanitize_select',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_style', array(
+			'label'	   				=> esc_html__( 'Style', 'ocean-social-sharing' ),
+			'type' 					=> 'select',
+			'section'  				=> 'oss_sharing_section',
+			'settings' 				=> 'oss_social_share_style',
+			'priority' 				=> 10,
+			'choices' 				=> array(
+				'minimal' 	=> esc_html__( 'Minimal', 'ocean-social-sharing' ),
+				'colored' 	=> esc_html__( 'Colored', 'ocean-social-sharing' ),
+				'dark'		=> esc_html__( 'Dark', 'ocean-social-sharing' ),
+			),
+		) ) );
+
+		/**
+		 * Border Radius
+		 */
+		$wp_customize->add_setting( 'oss_social_share_style_border_radius', array(
+			'transport' 			=> 'postMessage',
+			'sanitize_callback' 	=> 'wp_kses_post',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_style_border_radius', array(
+			'label'	   				=> esc_html__( 'Border Radius', 'ocean-social-sharing' ),
+			'description'	   		=> esc_html__( 'Add a custom border radius. px - em - %.', 'ocean-social-sharing' ),
+			'type' 					=> 'text',
+			'section'  				=> 'oss_sharing_section',
+			'settings' 				=> 'oss_social_share_style_border_radius',
+			'priority' 				=> 10,
+		) ) );
+
+		/**
 	     * Borders color
 	     */
         $wp_customize->add_setting( 'oss_sharing_borders_color', array(
-			'default'			=> '#e9e9e9',
 			'transport'			=> 'postMessage',
 			'sanitize_callback' => 'oceanwp_sanitize_color',
 		) );
 
 		$wp_customize->add_control( new OceanWP_Customizer_Color_Control( $wp_customize, 'oss_sharing_borders_color', array(
-			'label'			=> esc_html__( 'Links Borders Color', 'ocean-social-sharing' ),
+			'label'			=> esc_html__( 'Minimal Style: Borders Color', 'ocean-social-sharing' ),
 			'section'		=> 'oss_sharing_section',
 			'settings'		=> 'oss_sharing_borders_color',
 			'priority'		=> 10,
@@ -295,13 +382,12 @@ final class Ocean_Social_Sharing {
 	     * Icons background color
 	     */
         $wp_customize->add_setting( 'oss_sharing_icons_bg', array(
-			'default'			=> '#ffffff',
 			'transport'			=> 'postMessage',
 			'sanitize_callback' => 'oceanwp_sanitize_color',
 		) );
 
 		$wp_customize->add_control( new OceanWP_Customizer_Color_Control( $wp_customize, 'oss_sharing_icons_bg', array(
-			'label'			=> esc_html__( 'Icons Background Color', 'ocean-social-sharing' ),
+			'label'			=> esc_html__( 'Minimal Style: Background Color', 'ocean-social-sharing' ),
 			'section'		=> 'oss_sharing_section',
 			'settings'		=> 'oss_sharing_icons_bg',
 			'priority'		=> 10,
@@ -311,13 +397,12 @@ final class Ocean_Social_Sharing {
 	     * Icons color
 	     */
         $wp_customize->add_setting( 'oss_sharing_icons_color', array(
-			'default'			=> '#bbbbbb',
 			'transport'			=> 'postMessage',
 			'sanitize_callback' => 'oceanwp_sanitize_color',
 		) );
 
 		$wp_customize->add_control( new OceanWP_Customizer_Color_Control( $wp_customize, 'oss_sharing_icons_color', array(
-			'label'			=> esc_html__( 'Icons Color', 'ocean-social-sharing' ),
+			'label'			=> esc_html__( 'Minimal Style: Color', 'ocean-social-sharing' ),
 			'section'		=> 'oss_sharing_section',
 			'settings'		=> 'oss_sharing_icons_color',
 			'priority'		=> 10,
@@ -372,26 +457,33 @@ final class Ocean_Social_Sharing {
 	public function head_css( $output ) {
 		
 		// Global vars
-		$sharing_borders 		= get_theme_mod( 'oss_sharing_borders_color', '#e9e9e9' );
-		$sharing_icons_bg 		= get_theme_mod( 'oss_sharing_icons_bg', '#ffffff' );
-		$sharing_icons_color 	= get_theme_mod( 'oss_sharing_icons_color', '#bbbbbb' );
+		$sharing_border_radius 		= get_theme_mod( 'oss_social_share_style_border_radius' );
+		$sharing_borders 			= get_theme_mod( 'oss_sharing_borders_color' );
+		$sharing_icons_bg 			= get_theme_mod( 'oss_sharing_icons_bg' );
+		$sharing_icons_color 		= get_theme_mod( 'oss_sharing_icons_color' );
 
 		// Define css var
 		$css = '';
 
-		// Add borders color
-		if ( ! empty( $sharing_borders ) && '#e9e9e9' != $sharing_borders ) {
-			$css .= '.entry-share ul li a{border-color:'. $sharing_borders .';}';
+		// Add border radius
+		if ( ! empty( $sharing_border_radius ) ) {
+			$css .= '.entry-share ul li a{border-radius:'. $sharing_border_radius .';}';
+		}
+
+		// Add border color
+		if ( ! empty( $sharing_borders ) ) {
+			$css .= '.entry-share.minimal ul li a{border-color:'. $sharing_borders .';}';
 		}
 
 		// Add icon background
 		if ( ! empty( $sharing_icons_bg ) ) {
-			$css .= '.entry-share ul li a{background-color:'. $sharing_icons_bg .';}';
+			$css .= '.entry-share.minimal ul li a{background-color:'. $sharing_icons_bg .';}';
 		}
 
 		// Add icon color
-		if ( ! empty( $sharing_icons_color ) && '#bbbbbb' != $sharing_icons_color ) {
-			$css .= '.entry-share ul li a{color:'. $sharing_icons_color .';}';
+		if ( ! empty( $sharing_icons_color ) ) {
+			$css .= '.entry-share.minimal ul li a{color:'. $sharing_icons_color .';}';
+			$css .= '.entry-share.minimal ul li a .oss-icon{fill:'. $sharing_icons_color .';}';
 		}
 			
 		// Return CSS

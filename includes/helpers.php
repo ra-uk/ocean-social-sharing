@@ -13,7 +13,18 @@ if ( ! function_exists( 'oss_social_share_sites' ) ) {
 	function oss_social_share_sites() {
 
 		// Default socials
-		$socials = array( 'twitter', 'facebook', 'google_plus', 'pinterest', 'linkedin' );
+		$socials = array(
+			'twitter',
+			'facebook',
+			'google_plus',
+			'pinterest',
+			'linkedin',
+			'viber',
+			'vk',
+			'reddit',
+			'tumblr',
+			'viadeo',
+		);
 
 		// Get socials from Customizer
 		$socials = get_theme_mod( 'oss_social_share_sites', $socials );
