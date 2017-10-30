@@ -16,7 +16,8 @@ module.exports = function ( grunt ) {
 		uglify: {
 			prod: {
 				files: {
-					'assets/js/customizer.min.js': [ 'assets/js/customizer.js' ]
+					'assets/js/social.min.js': 'assets/js/social.js',
+					'assets/js/customizer.min.js': 'assets/js/customizer.js'
 				}
 			}
 		},
