@@ -95,7 +95,7 @@ $classes = implode( ' ', $classes ); ?>
 				$handle = get_theme_mod( 'oss_social_share_twitter_handle' ); ?>
 
 				<li class="twitter">
-					<a href="https://twitter.com/share?text=<?php echo rawurlencode( $title ); ?>&amp;url=<?php echo rawurlencode( esc_url( $url ) ); ?><?php if ( $handle ) echo '&amp;via='. esc_attr( $handle ); ?>" title="<?php esc_html_e( 'Share on Twitter', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://twitter.com/share?text=<?php echo rawurlencode( $title ); ?>&amp;url=<?php echo rawurlencode( esc_url( $url ) ); ?><?php if ( $handle ) echo '&amp;via='. esc_attr( $handle ); ?>" title="<?php esc_html_e( 'Share on Twitter', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-twitter-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
@@ -117,7 +117,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'facebook' == $site ) { ?>
 
 				<li class="facebook">
-					<a href="https://www.facebook.com/sharer.php?u=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Facebook', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://www.facebook.com/sharer.php?u=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Facebook', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-facebook-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M5.677,12.998V8.123h3.575V6.224C9.252,2.949,11.712,0,14.736,0h3.94v4.874h-3.94
@@ -140,7 +140,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'google_plus' == $site ) { ?>
 
 				<li class="googleplus">
-					<a href="https://plus.google.com/share?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Google+', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://plus.google.com/share?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Google+', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-googleplus-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M7.636,10.929V13.5h4.331c-0.175,1.104-1.309,3.236-4.331,3.236c-2.607,0-4.735-2.121-4.735-4.736
@@ -166,7 +166,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'pinterest' == $site ) { ?>
 
 				<li class="pinterest">
-					<a href="https://www.pinterest.com/pin/create/button/?url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;media=<?php echo wp_get_attachment_url( get_post_thumbnail_id( $post_id ) ); ?>&amp;description=<?php echo wp_trim_words( strip_shortcodes( get_the_content( $post_id ) ), 40 ); ?>" title="<?php esc_html_e( 'Share on Pinterest', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://www.pinterest.com/pin/create/button/?url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;media=<?php echo wp_get_attachment_url( get_post_thumbnail_id( $post_id ) ); ?>&amp;description=<?php echo wp_trim_words( strip_shortcodes( get_the_content( $post_id ) ), 40 ); ?>" title="<?php esc_html_e( 'Share on Pinterest', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-pinterest-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M13.757,17.343c-1.487,0-2.886-0.804-3.365-1.717c0,0-0.8,3.173-0.969,3.785
@@ -195,7 +195,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'linkedin' == $site ) { ?>
 
 				<li class="linkedin">
-					<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;title=<?php echo rawurlencode( $title ); ?>&amp;summary=<?php echo wp_trim_words( strip_shortcodes( get_the_content( $post_id ) ), 40 ); ?>&amp;source=<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_html_e( 'Share on LinkedIn', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;title=<?php echo rawurlencode( $title ); ?>&amp;summary=<?php echo wp_trim_words( strip_shortcodes( get_the_content( $post_id ) ), 40 ); ?>&amp;source=<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_html_e( 'Share on LinkedIn', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-linkedin-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M6.52,22h-4.13V8.667h4.13V22z M4.436,6.92
@@ -220,7 +220,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'viber' == $site ) { ?>
 
 				<li class="viber">
-					<a href="viber://forward?text=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Viber', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="viber://forward?text=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Viber', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-viber-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M14.957,5.825c0.764,0.163,1.349,0.453,1.849,0.921c0.643,0.608,0.996,1.343,1.151,2.4
@@ -263,7 +263,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'vk' == $site ) { ?>
 
 				<li class="vk">
-					<a href="https://vk.com/share.php?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on VK', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://vk.com/share.php?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on VK', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-vk-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M11.701 18.771h1.437s.433-.047.654-.284c.21-.221.21-.63.21-.63s-.031-1.927.869-2.21c.887-.281 2.012 1.86 3.211 2.683.916.629 1.605.494 1.605.494l3.211-.044s1.682-.105.887-1.426c-.061-.105-.451-.975-2.371-2.76-2.012-1.861-1.742-1.561.676-4.787 1.469-1.965 2.07-3.166 1.875-3.676-.166-.48-1.26-.361-1.26-.361l-3.602.031s-.27-.031-.465.09c-.195.119-.314.391-.314.391s-.572 1.529-1.336 2.82c-1.623 2.729-2.268 2.879-2.523 2.699-.604-.391-.449-1.58-.449-2.432 0-2.641.404-3.75-.781-4.035-.39-.091-.681-.15-1.685-.166-1.29-.014-2.378.01-2.995.311-.405.203-.72.652-.539.675.24.03.779.146 1.064.537.375.506.359 1.636.359 1.636s.211 3.116-.494 3.503c-.495.262-1.155-.28-2.595-2.756-.735-1.26-1.291-2.67-1.291-2.67s-.105-.256-.299-.406c-.227-.165-.557-.225-.557-.225l-3.435.03s-.51.016-.689.24c-.166.195-.016.615-.016.615s2.686 6.287 5.732 9.453c2.79 2.902 5.956 2.715 5.956 2.715l-.05-.055z"/>
@@ -285,7 +285,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'reddit' == $site ) { ?>
 
 				<li class="reddit">
-					<a href="http://www.reddit.com/submit?url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;title=<?php echo rawurlencode( $title ); ?>" title="<?php esc_html_e( 'Share on Reddit', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="http://www.reddit.com/submit?url=<?php echo rawurlencode( esc_url( $url ) ); ?>&amp;title=<?php echo rawurlencode( $title ); ?>" title="<?php esc_html_e( 'Share on Reddit', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-reddit-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M23.999,11.786c0-1.576-1.294-2.858-2.885-2.858c-0.689,0-1.321,0.241-1.817,0.641
@@ -320,7 +320,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'tumblr' == $site ) { ?>
 
 				<li class="tumblr">
-					<a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Tumblr', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Tumblr', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-tumblr-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M19.44,22.887c-1.034,0.487-1.97,0.828-2.808,1.024
@@ -347,7 +347,7 @@ $classes = implode( ' ', $classes ); ?>
 			if ( 'viadeo' == $site ) { ?>
 
 				<li class="viadeo">
-					<a href="https://partners.viadeo.com/share?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Viadeo', 'ocean-social-sharing' ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<a href="https://partners.viadeo.com/share?url=<?php echo rawurlencode( esc_url( $url ) ); ?>" title="<?php esc_html_e( 'Share on Viadeo', 'ocean-social-sharing' ); ?>" onclick="oss_onClick( this.href );return false;">
 						<span class="oss-icon-wrap">
 							<svg class="oss-icon" aria-labelledby="oss-viadeo-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path d="M21.046,0.546c-1.011,2.159-2.882,2.557-2.882,2.557c-1.87,0.476-2.525,1.202-2.525,1.202

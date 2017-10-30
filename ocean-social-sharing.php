@@ -186,7 +186,7 @@ final class Ocean_Social_Sharing {
 			require_once( $this->plugin_path .'/includes/helpers.php' );
 			add_action( 'customize_register', array( $this, 'customizer_register' ) );
 			add_action( 'customize_preview_init', array( $this, 'customize_preview_js' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'get_style' ), 999 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'get_scripts' ), 999 );
 			add_action( 'ocean_social_share', array( $this, 'social_share' ) );
 			add_filter( 'ocean_head_css', array( $this, 'head_css' ) );
 		} else {
@@ -418,13 +418,16 @@ final class Ocean_Social_Sharing {
 	}
 
 	/**
-	 * Enqueue style.
+	 * Enqueue scripts.
 	 * @since   1.0.0
 	 */
-	public function get_style() {
+	public function get_scripts() {
 
 		// Load main stylesheet
 		wp_enqueue_style( 'oss-social-share-style', plugins_url( '/assets/css/style.min.css', __FILE__ ) );
+
+		// Load main script
+		wp_enqueue_script( 'oss-social-share-script', plugins_url( '/assets/js/social.min.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 
 		// If rtl
 		if ( is_RTL() ) {
@@ -485,7 +488,7 @@ final class Ocean_Social_Sharing {
 			$css .= '.entry-share.minimal ul li a{color:'. $sharing_icons_color .';}';
 			$css .= '.entry-share.minimal ul li a .oss-icon{fill:'. $sharing_icons_color .';}';
 		}
-			
+
 		// Return CSS
 		if ( ! empty( $css ) ) {
 			$output .= '/* Social Sharing CSS */'. $css;
