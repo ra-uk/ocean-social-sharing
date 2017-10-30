@@ -2,8 +2,8 @@
 Contributors: oceanwp
 Tags: social, social sharing, social share, share, oceanwp
 Requires at least: 4.5
-Tested up to: 4.8
-Stable tag: 1.0.5.2
+Tested up to: 4.8.2
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,6 +11,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A simple plugin to add social share buttons to your posts.
 This plugin requires the [OceanWP](https://oceanwp.org/) theme to be installed.
+
+= Key Features =
+
+* Add social networks: Twitter, Facebook, LinkedIn, Google+, Pinterest, Viber, VK, Reddit, Tumblr and Viadeo.
+* Alter the social sharing buttons
+* Choose between three styles.
+* Add the social names.
+* Choose the heading position.
+* Add or edit the social sharing via a child theme.
 
 == Installation ==
 
@@ -26,9 +35,26 @@ This plugin will only work with the [OceanWP](https://oceanwp.org/) theme.
 
 == Screenshots ==
 
-1. The social sharing buttons.
+1. Minimal style.
+2. Colored style.
+3. Dark style.
+4. Heading top.
+5. Minimal style with names.
+6. Colored style with names.
+7. Dark style with names.
+8. Without Heading.
+9. Settings.
 
 == Changelog ==
+
+= 1.0.6 =
+- Added: New social networks: Viber, VK, Reddit, Tumblr and Viadeo.
+- Added: Three styles: Minimal, Colored and Dark.
+- Added: Social names, now you can display the social name and icon.
+- Added: Border Radius setting.
+- Added: Heading Position field to display the heading on side or top of the social buttons.
+- Tweak: Icons replaced by SVG so if you disable Font Awesome, the social share icons are still there.
+- Tweak: Social windows now opens in the middle of the page.
 
 = 1.0.5.2 =
 - Added: All sanitize_callback for the customizer options.
