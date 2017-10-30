@@ -11,8 +11,5 @@ function oss_onClick( href ) {
 		windowLeft 		= screen.width / 2 - windowWidth / 2,
 		shareWindow 	= 'toolbar=0,status=0,width=' + windowWidth + ',height=' + windowHeight + ',top=' + windowTop + ',left=' + windowLeft;
 
-	var isPlainLink = /^https?:\/\//.test( href ),
-		windowName  = isPlainLink ? '' : '_self';
-
-	open( href, windowName, shareWindow );
+	open( href, '', shareWindow );
 }
