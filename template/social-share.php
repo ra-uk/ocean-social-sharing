@@ -87,7 +87,7 @@ $classes = implode( ' ', $classes ); ?>
 					}
 					if ( $meta = get_post_meta( $post_id, '_yoast_wpseo_twitter-description', true ) ) {
 						$title = $title .': '. $meta;
-						$title = rawurlencode( $title );
+						$title = $title;
 					}
 				}
 

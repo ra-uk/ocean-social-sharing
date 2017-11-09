@@ -3,7 +3,7 @@ Contributors: oceanwp
 Tags: social, social sharing, social share, share, oceanwp
 Requires at least: 4.5
 Tested up to: 4.9
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ This plugin will only work with the [OceanWP](https://oceanwp.org/) theme.
 9. Settings.
 
 == Changelog ==
+
+= 1.0.7 =
+- Fixed: Issue with the Twitter button if you add a description via Yoast SEO.
 
 = 1.0.6 =
 - Added: New social networks: Viber, VK, Reddit, Tumblr and Viadeo.
