@@ -3,11 +3,11 @@
  * Plugin Name:			Ocean Social Sharing
  * Plugin URI:			https://oceanwp.org/extension/ocean-social-sharing/
  * Description:			A simple plugin to add social share buttons to your posts.
- * Version:				1.0.7
+ * Version:				1.0.8
  * Author:				OceanWP
  * Author URI:			https://oceanwp.org/
  * Requires at least:	4.5.0
- * Tested up to:		4.9
+ * Tested up to:		4.9.1
  *
  * Text Domain: ocean-social-sharing
  * Domain Path: /languages/
@@ -86,7 +86,7 @@ final class Ocean_Social_Sharing {
 		$this->token 			= 'ocean-social-sharing';
 		$this->plugin_url 		= plugin_dir_url( __FILE__ );
 		$this->plugin_path 		= plugin_dir_path( __FILE__ );
-		$this->version 			= '1.0.6';
+		$this->version 			= '1.0.8';
 
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
 
@@ -187,28 +187,16 @@ final class Ocean_Social_Sharing {
 			add_action( 'customize_register', array( $this, 'customizer_register' ) );
 			add_action( 'customize_preview_init', array( $this, 'customize_preview_js' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'get_scripts' ), 999 );
-			add_action( 'ocean_social_share', array( $this, 'social_share' ) );
+			add_action( 'ocean_before_single_post_content', array( $this, 'before_content' ) );
+			add_action( 'ocean_social_share', array( $this, 'after_content' ) );
 			add_filter( 'ocean_head_css', array( $this, 'head_css' ) );
-		} else {
-			add_action( 'admin_notices', array( $this, 'oss_install_ocean_notice' ) );
 		}
-	}
-
-	/**
-	 * OceanWP install
-	 * If the user activates the plugin while having a different parent theme active, prompt them to install OceanWP.
-	 * @since   1.0.0
-	 * @return  void
-	 */
-	public function oss_install_ocean_notice() {
-		echo '<div class="notice is-dismissible updated">
-				<p>' . esc_html__( 'Ocean Social Sharing requires that you use OceanWP as your parent theme.', 'ocean-social-sharing' ) . ' <a href="https://oceanwp.org/">' . esc_html__( 'Install OceanWP Now', 'ocean-social-sharing' ) . '</a></p>
-			</div>';
 	}
 
 	/**
 	 * Customizer Controls and settings
 	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 * @since   1.0.0
 	 */
 	public function customizer_register( $wp_customize ) {
 
@@ -255,6 +243,27 @@ final class Ocean_Social_Sharing {
 				'reddit' 		=> 'Reddit',
 				'tumblr' 		=> 'Tumblr',
 				'viadeo' 		=> 'Viadeo',
+			),
+		) ) );
+
+		/**
+		 * Position
+		 */
+		$wp_customize->add_setting( 'oss_social_share_position', array(
+			'default'           	=> 'after',
+			'sanitize_callback' 	=> 'oceanwp_sanitize_select',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'oss_social_share_position', array(
+			'label'	   				=> esc_html__( 'Position', 'ocean-social-sharing' ),
+			'type' 					=> 'select',
+			'section'  				=> 'oss_sharing_section',
+			'settings' 				=> 'oss_social_share_position',
+			'priority' 				=> 10,
+			'choices' 				=> array(
+				'before' 	=> esc_html__( 'Before the Content', 'ocean-social-sharing' ),
+				'after' 	=> esc_html__( 'After the Content', 'ocean-social-sharing' ),
+				'both' 		=> esc_html__( 'Before & After the Content', 'ocean-social-sharing' ),
 			),
 		) ) );
 
@@ -417,6 +426,8 @@ final class Ocean_Social_Sharing {
 
 	/**
 	 * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
+	 *
+	 * @since   1.0.0
 	 */
 	public function customize_preview_js() {
 		wp_enqueue_script( 'oss-customizer', plugins_url( '/assets/js/customizer.min.js', __FILE__ ), array( 'customize-preview' ), '1.1', true );
@@ -424,6 +435,7 @@ final class Ocean_Social_Sharing {
 
 	/**
 	 * Enqueue scripts.
+	 *
 	 * @since   1.0.0
 	 */
 	public function get_scripts() {
@@ -442,7 +454,42 @@ final class Ocean_Social_Sharing {
 	}
 
 	/**
-	 * Social sharing links
+	 * Social sharing links before content
+	 *
+	 * @since   1.0.8
+	 */
+	public function before_content() {
+
+		// Return if after content
+		if ( 'after' == get_theme_mod( 'oss_social_share_position', 'after' ) ) {
+			return;
+		} ?>
+
+		<div class="entry-share-wrap"><?php $this->social_share(); ?></div>
+
+	<?php
+	}
+
+	/**
+	 * Social sharing links after content
+	 *
+	 * @since   1.0.8
+	 */
+	public function after_content() {
+
+		// Return if after content
+		if ( 'before' == get_theme_mod( 'oss_social_share_position', 'after' ) ) {
+			return;
+		}
+
+		$this->social_share();
+
+	}
+
+	/**
+	 * Social sharing links template
+	 *
+	 * @since   1.0.0
 	 */
 	public function social_share() {
 
@@ -461,6 +508,8 @@ final class Ocean_Social_Sharing {
 
 	/**
 	 * Add css in head tag.
+	 *
+	 * @since   1.0.0
 	 */
 	public function head_css( $output ) {
 		
